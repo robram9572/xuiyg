@@ -15,12 +15,10 @@ require (
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/shirou/gopsutil v3.21.3+incompatible
 	github.com/tklauser/go-sysconf v0.3.5 // indirect
-	github.com/xtls/xray-core v1.4.2
+	github.com/xtls/xray-core v1.5.5
 	go.uber.org/atomic v1.9.0
-	golang.org/x/sys v0.0.0-20210511113859-b0526f3d8744 // indirect
 	golang.org/x/text v0.3.7
-	google.golang.org/grpc v1.38.0
-	gopkg.in/yaml.v2 v2.4.0 // indirect
+	google.golang.org/grpc v1.46.0
 	gorm.io/driver/sqlite v1.1.4
 	gorm.io/gorm v1.21.9
 )
