@@ -372,6 +372,11 @@ bash <(curl -L -s https://raw.githubusercontent.com/teddysun/across/master/bbr.s
     before_show_menu
 }
 
+cfwarp() {
+wget -N --no-check-certificate https://gitlab.com/rwkgyg/CFwarp/raw/main/CFwarp.sh && bash CFwarp.sh
+    echo ""
+    before_show_menu
+}
 
 update_shell() {
     wget -O /usr/bin/x-ui -N --no-check-certificate https://gitlab.com/rwkgyg/x-ui-yg/raw/main/x-ui.sh
@@ -522,13 +527,14 @@ show_menu() {
 ————————————————
   ${green}15.${plain} 一键ACME申请证书
   ${green}16.${plain} 一键BBR+FQ加速
+  ${green}17.${plain} 一键CFwarp脚本
  "
     show_status
     echo "------------------------------------------"
     acp=$(/usr/local/x-ui/x-ui setting -show 2>/dev/null)
     green "$acp"
     echo "------------------------------------------"
-    xuiygV="22.7.4 V 0.3.3.15.8"
+    xuiygV="22.8.25 V 0.3.3.15.9"
     remoteV=`wget -qO- https://gitlab.com/rwkgyg/x-ui-yg/raw/main/install.sh | sed  -n 2p | cut -d '"' -f 2`
     localV=${xuiygV}
     if [ "${localV}" = "${remoteV}" ]; then
@@ -574,6 +580,8 @@ show_menu() {
         15) acme
         ;;
         16) bbr
+        ;;
+        17) cfwarp
         ;;
         *) echo -e "${red}请输入正确的数字 [0-16]${plain}"
         ;;
