@@ -1,3 +1,4 @@
+#!/bin/bash
 red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
@@ -487,7 +488,7 @@ show_xray_status() {
 show_usage() {
     echo "x-ui 管理脚本使用方法: "
     echo "------------------------------------------"
-    echo "x-ui              - 显示管理菜单【一键证书申请（支持域名直接申请与dns api申请），简单版BBR+FQ加速，脚本自动检测更新提示】"
+    echo "x-ui              - 显示管理菜单【一键证书申请（支持域名直接申请与dns api申请），warp脚本，脚本自动检测更新提示】"
     echo "x-ui start        - 启动 x-ui 面板"
     echo "x-ui stop         - 停止 x-ui 面板"
     echo "x-ui restart      - 重启 x-ui 面板"
@@ -583,7 +584,7 @@ show_menu() {
         ;;
         17) cfwarp
         ;;
-        *) echo -e "${red}请输入正确的数字 [0-16]${plain}"
+        *) echo -e "${red}请输入正确的数字 [0-17]${plain}"
         ;;
     esac
 }
