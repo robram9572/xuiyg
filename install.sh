@@ -24,7 +24,7 @@ green "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 white "甬哥Gitlab项目  ：gitlab.com/rwkgyg"
 white "甬哥blogger博客 ：ygkkk.blogspot.com"
 white "甬哥YouTube频道 ：www.youtube.com/c/甬哥侃侃侃kkkyg"
-yellow "感谢x-ui代码贡献者们（vaxilu、FranzKafkaYu及各位）在上游的更新维护"
+yellow "感谢x-ui代码贡献者们（vaxilu、FranzKafkaYu及各位）"
 green "当前安装版本：$remoteV"
 yellow "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
 sleep 2
