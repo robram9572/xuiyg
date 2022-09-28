@@ -157,7 +157,7 @@ TUN=$(cat /dev/net/tun 2>&1)
 if [[ ! $TUN =~ 'in bad state' ]] && [[ ! $TUN =~ '处于错误状态' ]] && [[ ! $TUN =~ 'Die Dateizugriffsnummer ist in schlechter Verfassung' ]]; then
 green "添加TUN支持失败，建议与VPS厂商沟通或后台设置开启" && exit 0
 else
-green "恭喜，添加TUN支持成功，现执行重启VPS自动开启TUN守护功能" && sleep 2
+green "恭喜，添加TUN支持成功" && sleep 2
 cat>/root/tun.sh<<-\EOF
 #!/bin/bash
 cd /dev
@@ -167,7 +167,6 @@ chmod 0666 net/tun
 EOF
 chmod +x /root/tun.sh
 grep -qE "^ *@reboot root bash /root/tun.sh >/dev/null 2>&1" /etc/crontab || echo "@reboot root bash /root/tun.sh >/dev/null 2>&1" >> /etc/crontab
-green "重启VPS自动开启TUN守护功能已启动"
 fi
 fi
 fi
@@ -238,7 +237,6 @@ install_x-ui() {
     systemctl daemon-reload
     systemctl enable x-ui
     systemctl start x-ui
-green "安装每分种自检x-ui的守护进程" 
 sleep 2
 cat>/root/goxui.sh<<-\EOF
 #!/bin/bash
@@ -255,8 +253,6 @@ EOF
 chmod +x /root/goxui.sh
 sed -i '/goxui.sh/d' /etc/crontab
 echo "*/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" >> /etc/crontab
-green "x-ui守护进程设置完毕" && sleep 1
-green "设置x-ui每月1日自动重启一次，防止x-ui对自动续期后的证书不识别问题"
 sed -i '/x-ui restart/d' /etc/crontab
 echo "0 1 1 * * x-ui restart >/dev/null 2>&1" >> /etc/crontab
 sleep 1
