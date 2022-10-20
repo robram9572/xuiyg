@@ -198,6 +198,8 @@ echo -e "${green}检测到VPS为纯IPV6 Only,添加dns64${plain}\n"
 echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
 fi
 fi
+rm -rf /etc/localtime
+ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 }
 install_x-ui() {
     systemctl stop x-ui
