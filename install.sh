@@ -179,7 +179,6 @@ ufw disable >/dev/null 2>&1
 iptables -P INPUT ACCEPT >/dev/null 2>&1
 iptables -P FORWARD ACCEPT >/dev/null 2>&1
 iptables -P OUTPUT ACCEPT >/dev/null 2>&1
-iptables -t nat -F >/dev/null 2>&1
 iptables -t mangle -F >/dev/null 2>&1
 iptables -F >/dev/null 2>&1
 iptables -X >/dev/null 2>&1
