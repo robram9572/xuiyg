@@ -5,6 +5,7 @@ yellow='\033[0;33m'
 plain='\033[0m'
 green(){ echo -e "\033[32m\033[01m$1\033[0m";}
 yellow(){ echo -e "\033[33m\033[01m$1\033[0m";}
+readp(){ read -p "$(yellow "$1")" $2;}
 # check root
 [[ $EUID -ne 0 ]] && echo -e "${red}错误: ${plain} 必须使用root用户运行此脚本！\n" && exit 1
  
