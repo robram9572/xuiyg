@@ -192,8 +192,7 @@ uninstall() {
     systemctl reset-failed
     rm /etc/x-ui/ -rf
     rm /usr/local/x-ui/ -rf
-    rm -rf goxui.sh acme.sh
-    sed -i '/goxui.sh/d' /etc/crontab >/dev/null 2>&1
+    rm -rf acme.sh
     sed -i '/x-ui restart/d' /etc/crontab >/dev/null 2>&1
     rm /usr/bin/x-ui -f
     green "x-ui已卸载成功，后会有期！"
