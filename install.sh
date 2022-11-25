@@ -237,21 +237,21 @@ install_x-ui() {
     systemctl enable x-ui
     systemctl start x-ui
 sleep 2
-cat>/root/goxui.sh<<-\EOF
-#!/bin/bash
-xui=`ps -aux |grep "x-ui" |grep -v "grep" |wc -l`
-xray=`ps -aux |grep "xray" |grep -v "grep" |wc -l`
-sleep 1
-if [ $xui = 0 ];then
-x-ui restart
-fi
-if [ $xray = 0 ];then
-x-ui restart
-fi
-EOF
-chmod +x /root/goxui.sh
-sed -i '/goxui.sh/d' /etc/crontab
-echo "*/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" >> /etc/crontab
+#cat>/root/goxui.sh<<-\EOF
+##!/bin/bash
+#xui=`ps -aux |grep "x-ui" |grep -v "grep" |wc -l`
+#xray=`ps -aux |grep "xray" |grep -v "grep" |wc -l`
+#sleep 1
+#if [ $xui = 0 ];then
+#x-ui restart
+#fi
+#if [ $xray = 0 ];then
+#x-ui restart
+#fi
+#EOF
+#chmod +x /root/goxui.sh
+#sed -i '/goxui.sh/d' /etc/crontab
+#echo "*/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" >> /etc/crontab
 sed -i '/x-ui restart/d' /etc/crontab
 echo "0 1 1 * * x-ui restart >/dev/null 2>&1" >> /etc/crontab
 sleep 1
