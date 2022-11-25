@@ -199,21 +199,34 @@ uninstall() {
 }
 
 reset_user() {
-    confirm "确定要将用户名和密码重置为随机6位字符吗" "n"
-    if [[ $? != 0 ]]; then
-        if [[ $# == 0 ]]; then
-            show_menu
-        fi
-        return 0
-    fi
-    uauto=`date +%s%N |md5sum | cut -c 1-6`
-    username=$uauto
-    pauto=`date +%s%N |md5sum | cut -c 1-6`
-    password=$pauto
-    /usr/local/x-ui/x-ui setting -username ${username} -password ${password} >/dev/null 2>&1
-    green "x-ui登录用户名：${username}"
-    green "x-ui登录密码：${password}"
-    confirm_restart
+readp "设置x-ui登录用户名，必须为6位字符以上（回车跳过为随机6位字符）：" username
+if [[ -z ${username} ]]; then
+username=`date +%s%N |md5sum | cut -c 1-6`
+else
+if [[ 6 -ge ${#username} ]]; then
+until [[ 6 -le ${#username} ]]
+do
+[[ 6 -ge ${#username} ]] && yellow "\n用户名必须为6位字符以上！请重新输入" && readp "\n设置x-ui登录用户名：" username
+done
+fi
+fi
+sleep 1
+green "x-ui登录用户名：${username}"
+echo -e ""
+readp "设置x-ui登录密码，必须为6位字符以上（回车跳过为随机6位字符）：" password
+if [[ -z ${password} ]]; then
+pauto=`date +%s%N |md5sum | cut -c 1-6`
+else
+if [[ 6 -ge ${#password} ]]; then
+until [[ 6 -le ${#password} ]]
+do
+[[ 6 -ge ${#password} ]] && yellow "\n用户名必须为6位字符以上！请重新输入" && readp "\n设置x-ui登录密码：" password
+done
+fi
+fi
+green "x-ui登录密码：${password}"
+/usr/local/x-ui/x-ui setting -username ${username} -password ${password} >/dev/null 2>&1
+confirm_restart
 }
 
 reset_config() {
@@ -282,9 +295,6 @@ stop() {
         echo -e "${green}面板已停止，无需再次停止${plain}"
     else
         systemctl stop x-ui
-        rm -rf goxui.sh
-        sed -i '/goxui.sh/d' /etc/crontab >/dev/null 2>&1
-        sleep 2
         check_status
         if [[ $? == 1 ]]; then
             echo -e "${green}x-ui 与 xray 停止成功${plain}"
