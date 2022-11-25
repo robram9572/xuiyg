@@ -1,5 +1,5 @@
 #!/bin/bash
-xuiygV="22.8.25 V 0.3.3.15.9"
+xuiygV="22.11.25 V 1.0"
 red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
@@ -24,7 +24,7 @@ green "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 white "甬哥Gitlab项目  ：gitlab.com/rwkgyg"
 white "甬哥blogger博客 ：ygkkk.blogspot.com"
 white "甬哥YouTube频道 ：www.youtube.com/c/甬哥侃侃侃kkkyg"
-yellow "感谢x-ui代码贡献者们（vaxilu、FranzKafkaYu及各位）"
+yellow "感谢x-ui代码贡献者们（vaxilu及各位）"
 green "当前安装版本：$remoteV"
 yellow "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
 sleep 2
