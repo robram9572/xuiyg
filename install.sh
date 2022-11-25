@@ -258,18 +258,30 @@ sleep 1
 echo -e ""
 blue "以下设置内容建议自定义，以防止账号密码及端口泄露"
 echo -e ""
-readp "设置x-ui登录用户名（回车跳过为随机6位字符）：" username
+readp "设置x-ui登录用户名，必须为6位字符以上（回车跳过为随机6位字符）：" username
 if [[ -z ${username} ]]; then
-uauto=`date +%s%N |md5sum | cut -c 1-6`
-username=$uauto
+username=`date +%s%N |md5sum | cut -c 1-6`
+else
+if [[ 6 -ge ${#username} ]]; then
+until [[ 6 -le ${#username} ]]
+do
+[[ 6 -ge ${#username} ]] && yellow "\n用户名必须为6位字符以上！请重新输入" && readp "\n设置x-ui登录用户名：" username
+done
+fi
 fi
 sleep 1
 green "x-ui登录用户名：${username}"
 echo -e ""
-readp "设置x-ui登录密码（回车跳过为随机6位字符）：" password
+readp "设置x-ui登录密码，必须为6位字符以上（回车跳过为随机6位字符）：" password
 if [[ -z ${password} ]]; then
 pauto=`date +%s%N |md5sum | cut -c 1-6`
-password=$pauto
+else
+if [[ 6 -ge ${#password} ]]; then
+until [[ 6 -le ${#password} ]]
+do
+[[ 6 -ge ${#password} ]] && yellow "\n用户名必须为6位字符以上！请重新输入" && readp "\n设置x-ui登录密码：" password
+done
+fi
 fi
 green "x-ui登录密码：${password}"
 /usr/local/x-ui/x-ui setting -username ${username} -password ${password} >/dev/null 2>&1
@@ -291,7 +303,6 @@ fi
 /usr/local/x-ui/x-ui setting -port $port >/dev/null 2>&1
 green "x-ui登录端口：${port}"
 sleep 1
-x-ui restart
 xuilogin(){
 v4=$(curl -s4m8 https://ip.gs -k)
 v6=$(curl -s6m8 https://ip.gs -k)
@@ -303,8 +314,7 @@ else
 int="${green}请在浏览器地址栏复制${plain}  ${bblue}$v4:$ports${plain}  ${green}进入x-ui登录界面\n当前x-ui登录用户名：${plain}${bblue}${username}${plain}${green} \n当前x-ui登录密码：${plain}${bblue}${password}${plain}"
 fi
 }
-ports=$(/usr/local/x-ui/x-ui 2>&1 | grep tcp | awk '{print $5}' | sed "s/://g")
-if [[ -n $ports ]]; then
+if [[ -n $(systemctl status x-ui 2>/dev/null | grep -w active) ]]; then
 echo -e ""
 yellow "x-ui-yg $remoteV 安装成功，请稍等3秒，检测IP环境，输出x-ui登录信息……"
 wgcfv6=$(curl -s6m8 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
@@ -317,7 +327,7 @@ xuilogin
 systemctl start wg-quick@wgcf >/dev/null 2>&1
 fi
 else
-red "x-ui安装失败，请查看日志，运行 x-ui log"
+red "x-ui安装失败，请运行 systemctl status x-ui 查看x-ui状态"
 fi
     sleep 1
     echo -e ""
