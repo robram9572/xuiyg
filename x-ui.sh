@@ -57,23 +57,23 @@ elif [[ x"${release}" == x"amazon_linux" ]]; then
     fi
 fi
 
-xuigo(){
-cat>/root/goxui.sh<<-\EOF
-#!/bin/bash
-xui=`ps -aux |grep "x-ui" |grep -v "grep" |wc -l`
-xray=`ps -aux |grep "xray" |grep -v "grep" |wc -l`
-sleep 1
-if [ $xui = 0 ];then
-x-ui restart
-fi
-if [ $xray = 0 ];then
-x-ui restart
-fi
-EOF
-chmod +x /root/goxui.sh
-sed -i '/goxui.sh/d' /etc/crontab >/dev/null 2>&1
-echo "*/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" >> /etc/crontab
-}
+#xuigo(){
+#cat>/root/goxui.sh<<-\EOF
+##!/bin/bash
+#xui=`ps -aux |grep "x-ui" |grep -v "grep" |wc -l`
+#xray=`ps -aux |grep "xray" |grep -v "grep" |wc -l`
+#sleep 1
+#if [ $xui = 0 ];then
+#x-ui restart
+#fi
+#if [ $xray = 0 ];then
+#x-ui restart
+#fi
+#EOF
+#chmod +x /root/goxui.sh
+#sed -i '/goxui.sh/d' /etc/crontab >/dev/null 2>&1
+#echo "*/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" >> /etc/crontab
+#}
 
 confirm() {
     if [[ $# > 1 ]]; then
@@ -262,7 +262,6 @@ start() {
         echo -e "${green}面板已运行，无需再次启动，如需重启请选择重启${plain}"
     else
         systemctl start x-ui
-        xuigo
         sleep 2
         check_status
         if [[ $? == 0 ]]; then
@@ -302,7 +301,6 @@ stop() {
 
 restart() {
     systemctl restart x-ui
-    xuigo
     sleep 2
     check_status
     if [[ $? == 0 ]]; then
