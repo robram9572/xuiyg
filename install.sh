@@ -1,5 +1,5 @@
 #!/bin/bash
-xuiygV="22.11.25 V 1.0"
+xuiygV="22.11.26 V 1.1"
 red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
