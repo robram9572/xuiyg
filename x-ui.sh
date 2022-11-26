@@ -550,7 +550,7 @@ show_menu() {
     green "已安装最新版本：${xuiygV} ，如有更新，此处会自动提示"
     else
     green "当前安装的版本：${xuiygV}"
-    yellow "检测到最新版本：${remoteV} ，可选择2进行更新！"
+    yellow "检测到最新版本：${remoteV} ，本次更新将删除所有节点，用户名与密码重置为admin，端口54321，请及时更改！！！可选择2进行更新！"
     fi
         
     echo && read -p "请输入选择 [0-17]: " num
