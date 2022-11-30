@@ -274,7 +274,7 @@ green "x-ui登录用户名：${username}"
 echo -e ""
 readp "设置x-ui登录密码，必须为6位字符以上（回车跳过为随机6位字符）：" password
 if [[ -z ${password} ]]; then
-pauto=`date +%s%N |md5sum | cut -c 1-6`
+password=`date +%s%N |md5sum | cut -c 1-6`
 else
 if [[ 6 -ge ${#password} ]]; then
 until [[ 6 -le ${#password} ]]
