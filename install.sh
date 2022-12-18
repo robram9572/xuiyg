@@ -327,9 +327,9 @@ systemctl stop wg-quick@wgcf >/dev/null 2>&1
 kill -15 $(pgrep warp-go) >/dev/null 2>&1 && sleep 2
 xuilogin
 systemctl start wg-quick@wgcf >/dev/null 2>&1
-systemctl restart warp-go
-systemctl enable warp-go
-systemctl start warp-go
+systemctl restart warp-go >/dev/null 2>&1
+systemctl enable warp-go >/dev/null 2>&1
+systemctl start warp-go >/dev/null 2>&1
 fi
 else
 red "x-ui安装失败，请运行 systemctl status x-ui 查看x-ui状态"
